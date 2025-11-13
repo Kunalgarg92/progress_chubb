@@ -1,0 +1,9 @@
+2025-11-13 04:12:28 [INFO] Starting Sales Report Application...
+2025-11-13 04:12:28 [INFO] Reading data from: C:\Users\kunal\chubb_workspace\task-1\src\sales.txt
+2025-11-13 04:12:28 [INFO] Loaded 5 sales records.
+2025-11-13 04:12:28 [INFO] Calculated total revenue: 488.35
+2025-11-13 04:12:28 [INFO] Generated revenue by product report.
+2025-11-13 04:12:28 [INFO] Generated revenue by customer report.
+2025-11-13 04:12:28 [INFO] Calculated average unit price per product.
+2025-11-13 04:12:28 [INFO] Top selling product: Widget (35 units)
+2025-11-13 04:12:28 [INFO] Report generation completed successfully.

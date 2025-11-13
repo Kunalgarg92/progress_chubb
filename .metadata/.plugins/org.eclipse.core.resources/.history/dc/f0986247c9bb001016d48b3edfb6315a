@@ -1,0 +1,15 @@
+package logging;
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+public class MathCalculationTest {
+	
+	@Test
+	public void testAdd() {
+		System.out.println("Test is successful");
+	}
+	@Test
+	public void testMul() {
+		System.out.println("Test is successful with Mul");
+	}
+}

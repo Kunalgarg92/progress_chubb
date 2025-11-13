@@ -1,0 +1,5 @@
+1,2025-11-01,Acme Corp,Widget,10,9.99,USD
+2,2025-11-02,Globex,Widget,5,9.99,USD
+3,2025-11-02,Acme Corp,Gizmo,2,49.5,USD
+4,2025-11-03,Initech,Widget,20,9.5,USD
+5,2025-11-04,Acme Corp,Gizmo,1,49.5,USD

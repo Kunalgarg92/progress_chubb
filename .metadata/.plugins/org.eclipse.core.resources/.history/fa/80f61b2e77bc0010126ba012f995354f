@@ -1,0 +1,78 @@
+package logging;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import com.app.process.FundTransferService;
+
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+class FundTransferServiceTest {
+
+    private AccountService accountService;
+    private FundTransferService transferService;
+
+    @BeforeEach
+    void setup() {
+        accountService = mock(AccountService.class);
+        transferService = new FundTransferService(accountService);
+    }
+
+    @Test
+    void testInvalidAmount() {
+        String result = transferService.transfer("Kunal", "Kunal", 0);
+        assertEquals("FAILURE: Invalid amount", result);
+    }
+
+    @Test
+    void testSameAccount() {
+        String result = transferService.transfer("Kunal", "Kunal", 500);
+        assertEquals("FAILURE: Source and destination cannot be same", result);
+    }
+
+    @Test
+    void testInsufficientFunds() {
+        when(accountService.getBalance("Kunal")).thenReturn(100.0);
+        String result = transferService.transfer("Kunal", "XYZ", 500);
+        assertEquals("FAILURE: Insufficient funds", result);
+    }
+
+    @Test
+    void testDestinationAccountNotFound() {
+        when(accountService.getBalance("A1")).thenReturn(1000.0);
+        when(accountService.exists("A2")).thenReturn(false);
+        String result = transferService.transfer("A1", "A2", 200);
+        assertEquals("FAILURE: Destination account not found", result);
+    }
+
+    @Test
+    void testTransactionErrorWhenDebitFails() {
+        when(accountService.getBalance("A1")).thenReturn(1000.0);
+        when(accountService.exists("A2")).thenReturn(true);
+        when(accountService.debit("A1", 200)).thenReturn(false); // Debit fails
+        when(accountService.credit("A2", 200)).thenReturn(true);
+        String result = transferService.transfer("A1", "A2", 200);
+        assertEquals("FAILURE: Transaction error", result);
+    }
+
+    @Test
+    void testTransactionErrorWhenCreditFails() {
+        when(accountService.getBalance("A1")).thenReturn(1000.0);
+        when(accountService.exists("A2")).thenReturn(true);
+        when(accountService.debit("A1", 200)).thenReturn(true);
+        when(accountService.credit("A2", 200)).thenReturn(false); 
+        String result = transferService.transfer("A1", "A2", 200);
+        assertEquals("FAILURE: Transaction error", result);
+    }
+
+    @Test
+    void testSuccessfulTransfer() {
+        when(accountService.getBalance("A1")).thenReturn(1000.0);
+        when(accountService.exists("A2")).thenReturn(true);
+        when(accountService.debit("A1", 200)).thenReturn(true);
+        when(accountService.credit("A2", 200)).thenReturn(true);
+        String result = transferService.transfer("A1", "A2", 200);
+        assertEquals("SUCCESS: Transfer completed", result);
+    }
+}
+

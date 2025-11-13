@@ -1,0 +1,25 @@
+package com.example.sales;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class LogGenerator {
+
+    private static final Logger logger = LogManager.getLogger(LogGenerator.class);
+
+    public static void main(String[] args) throws InterruptedException {
+        System.out.println("Generating logs... (check app.log after this)");
+
+        for (int i = 0; i < 10; i++) {
+            logger.info("Application heartbeat " + i);
+            if (i % 3 == 0)
+                logger.warn("Potential latency detected in request " + i);
+            if (i % 5 == 0)
+                logger.error("Service unavailable for request " + i);
+
+            Thread.sleep(300);
+        }
+
+        logger.info("Application finished logging.");
+    }
+}

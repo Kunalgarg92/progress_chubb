@@ -1,0 +1,9 @@
+package com.example.sales;
+
+public class Iterative_functional {
+
+	public Iterative_functional() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

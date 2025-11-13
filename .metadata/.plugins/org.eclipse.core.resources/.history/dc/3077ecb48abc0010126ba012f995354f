@@ -1,0 +1,9 @@
+package com.app.process;
+
+public class SmartCalculator {
+
+	public SmartCalculator() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

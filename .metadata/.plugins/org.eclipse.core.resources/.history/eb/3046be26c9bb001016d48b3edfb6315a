@@ -1,0 +1,9 @@
+package logging;
+
+public class MathCalculationTest {
+
+	public MathCalculationTest() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

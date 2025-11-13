@@ -1,0 +1,12 @@
+[2025-11-07 16:07:14] [DEBUG] CustomerLogin - Entering in method main
+[2025-11-07 16:07:14] [DEBUG] CustomerLogin - Debug Message — For developer analysis
+[2025-11-07 16:07:14] [INFO ] CustomerLogin - Info Message — Normal flow information
+[2025-11-07 16:07:14] [WARN ] CustomerLogin - Warning Message — Something might be off
+[2025-11-07 16:07:14] [ERROR] CustomerLogin - Error Message — Something failed
+[2025-11-07 16:07:14] [FATAL] CustomerLogin - Fatal Message — Critical system failure
+[2025-11-07 16:30:55] [DEBUG] CustomerLogin - Entering in method main
+[2025-11-07 16:30:55] [DEBUG] CustomerLogin - Debug Message — For developer analysis
+[2025-11-07 16:30:55] [INFO ] CustomerLogin - Info Message — Normal flow information
+[2025-11-07 16:30:55] [WARN ] CustomerLogin - Warning Message — Something might be off
+[2025-11-07 16:30:55] [ERROR] CustomerLogin - Error Message — Something failed
+[2025-11-07 16:30:55] [FATAL] CustomerLogin - Fatal Message — Critical system failure

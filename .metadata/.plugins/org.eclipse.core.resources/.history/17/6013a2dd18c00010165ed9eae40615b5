@@ -1,0 +1,9 @@
+package com.example.sales;
+
+public class salesReportApp {
+
+	public salesReportApp() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

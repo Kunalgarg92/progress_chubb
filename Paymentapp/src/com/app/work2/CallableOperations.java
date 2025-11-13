@@ -1,0 +1,16 @@
+package com.app.work2;
+import java.util.concurrent.*;
+import java.util.concurrent.Executors;
+
+public class CallableOperations {
+	public static void main(String[] args) throws Exception {
+		CallableCounter callobj = new CallableCounter();
+		ExecutorService exc = Executors.newFixedThreadPool(10);
+//		exc.execute(null);
+		Future<String> ftobj = exc.submit(callobj);
+		System.out.println(ftobj.isDone());
+		System.out.println(callobj.call());
+		exc.shutdown();
+		System.out.println(ftobj.isDone());
+	}
+}

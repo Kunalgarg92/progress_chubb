@@ -1,0 +1,79 @@
+package com.example.sales;
+
+import java.io.IOException;
+import java.nio.file.*;
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class LogParserApp {
+
+    public static void main(String[] args) {
+        Path logPath = Path.of("app.log"); 
+
+        if (!Files.exists(logPath)) {
+            System.err.println("No log file found! Run LogGenerator first.");
+            return;
+        }
+
+        System.out.println("Parsing log file: " + logPath.toAbsolutePath());
+
+        try (Stream<String> lines = Files.lines(logPath)) {
+
+            // 1️⃣ Filter out blank lines
+            List<String> allLogs = lines
+                    .filter(Predicate.not(String::isBlank))
+                    .collect(Collectors.toList());
+
+            // 2️⃣ Count by log level (INFO, WARN, ERROR)
+            Map<String, Long> logCountByLevel = allLogs.stream()
+                    .map(LogParserApp::extractLevel)
+                    .filter(level -> !level.isEmpty())
+                    .collect(Collectors.groupingBy(level -> level, Collectors.counting()));
+
+            System.out.println("\nLog Count by Level:");
+            logCountByLevel.forEach((level, count) -> System.out.printf("  %s -> %d%n", level, count));
+
+            // 3️⃣ Extract log messages
+            List<String> messages = allLogs.stream()
+                    .map(LogParserApp::extractMessage)
+                    .collect(Collectors.toList());
+
+            // 4️⃣ Find top 3 repeated messages
+            Map<String, Long> messageFrequency = messages.stream()
+                    .collect(Collectors.groupingBy(msg -> msg, Collectors.counting()));
+
+            System.out.println("\nTop 3 Most Common Messages:");
+            messageFrequency.entrySet().stream()
+                    .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
+                    .limit(3)
+                    .forEach(entry ->
+                            System.out.printf("  (%d) %s%n", entry.getValue(), entry.getKey()));
+
+            // 5️⃣ Show only ERROR logs
+            System.out.println("\nError Logs:");
+            allLogs.stream()
+                    .filter(line -> line.contains("[ERROR]"))
+                    .forEach(System.out::println);
+
+        } catch (IOException e) {
+            System.err.println("Error reading log file: " + e.getMessage());
+        }
+    }
+
+    private static String extractLevel(String line) {
+        int start = line.indexOf('[');
+        int end = line.indexOf(']');
+        if (start >= 0 && end > start)
+            return line.substring(start + 1, end);
+        return "";
+    }
+
+    private static String extractMessage(String line) {
+        int idx = line.indexOf("] ");
+        if (idx >= 0 && idx + 2 < line.length())
+            return line.substring(idx + 2).trim();
+        return line.trim();
+    }
+}
