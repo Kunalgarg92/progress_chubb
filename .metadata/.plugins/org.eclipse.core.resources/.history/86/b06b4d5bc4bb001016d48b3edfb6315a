@@ -1,9 +1,0 @@
-package _Egoverner;
-
-public class CustomerLogin {
-
-	public CustomerLogin() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

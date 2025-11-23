@@ -1,9 +1,0 @@
-package com.app.process;
-
-public class logging {
-
-	public logging() {
-		// TODO Auto-generated constructor stub
-	}
-
-}
