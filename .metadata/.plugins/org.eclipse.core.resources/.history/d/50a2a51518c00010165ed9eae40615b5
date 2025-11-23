@@ -1,9 +1,0 @@
-package com.example.sales;
-
-public class LogParserApp {
-
-	public LogParserApp() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

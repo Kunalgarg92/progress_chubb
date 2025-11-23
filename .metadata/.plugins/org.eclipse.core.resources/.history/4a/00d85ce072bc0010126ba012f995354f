@@ -1,9 +1,0 @@
-package logging;
-
-public class FundTransferServiceTest {
-
-	public FundTransferServiceTest() {
-		// TODO Auto-generated constructor stub
-	}
-
-}
